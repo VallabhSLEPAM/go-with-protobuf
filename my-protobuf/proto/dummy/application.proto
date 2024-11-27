@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package the.dummy;
+
+option go_package = "my-protobuf/protogen/dummy";
+
+// Job application
+message application{
+
+    uint32 application_id = 1;
+    string applicant_name = 2;
+    uint32 phone = 3;
+    string email = 4;
+
+}

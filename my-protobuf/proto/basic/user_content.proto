@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "my-protobuf/protogen/basic";
+
+message UserContent{
+    uint32 user_content_id = 1;
+    string slug = 2;
+    string title = 3;
+    string html_content = 4;
+    uint32 author_id = 5;
+    string category = 6;
+    string sub_category = 7;
+}

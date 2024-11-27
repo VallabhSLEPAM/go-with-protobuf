@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/google/type/date.proto";
+import "proto/google/type/latlng.proto";
+
+option go_package = "my-protobuf/protogen/basic";
+
+enum Gender{
+    GENDER_MALE = 0;
+    GENDER_FEMALE = 1;
+    GENDER_OTHERS = 2;
+}
+
+message User{
+    uint32 id = 1;
+    string username  = 2;
+    bool is_active = 3 [json_name = "is_active"];
+    bytes password = 4;
+    Gender gender = 16;
+    repeated string emails = 17;
+    Address address = 18; 
+
+    google.protobuf.Any communication_channel = 19[json_name = "communication_channel"];
+    oneof electronic_comm_channel {
+        socialMediaPlatform socialMedia = 20 [json_name = "social_media"];
+        instantMessagingPlatform InstantMessaging = 21 [json_name = "instant_messaging"];
+    };
+
+    map<string,uint32> skill_rating = 22 [json_name = "skill_rating"];
+
+    google.protobuf.Timestamp last_login_timestamp = 23;
+    google.type.Date birth_date = 24;
+    google.type.LatLng last_known_location = 25;
+}
+message Address{
+    string street = 1;
+    string city = 2;
+    string country = 3;
+
+    Coordinate coordinate = 16;
+
+    message Coordinate{
+        double latitude = 1;
+        double longitude = 2;
+    }
+
+}
+
+
+message paperMail{
+    string paper_mail_address = 1[json_name="paper_mail_address"];
+}
+
+message socialMediaPlatform{
+    string social_media_platform = 1[json_name="social_media_platform"];
+    string social_media_username = 2[json_name="social_media_username"];
+}
+
+message instantMessagingPlatform{
+    string instant_messaging_platform = 1[json_name="instant_messaging_platform"];
+    string instant_messaging_username = 2[json_name="instant_messaging_username"];
+}
